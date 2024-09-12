@@ -1,0 +1,44 @@
+
+{{ 'banner.css' | asset_url | stylesheet_tag }}
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          
+          <img src="{{ block.settings.slide_image | image_url }}" alt="slide" class="item_slide">
+        </div>
+    {% endfor %}
+
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      {% comment %} pagination: {
+        el: ".swiper-pagination",
+      }, {% endcomment %}
+    });
+  </script>
+
+  {% schema %}
+    {
+    "name": "slider-banner",
+    "blocks": [
+        {
+        "type": "slide",
+        "name": "Slider",
+        "settings": [
+            {
+            "type": "image_picker",
+            "id": "slide_image",
+            "label": "Selecciona tu Imagen"
+            }
+        ]
+
+        }
+    ]
+    
+    }
+  {% endschema %}
